@@ -1,0 +1,15 @@
+#%Module######################################################################
+module-whatis "SUMMARY"
+set             root            /usr/local/NAME
+set             version         VERSION
+module unload PrgEnv-cray/5.2.82
+module load PrgEnv-gnu
+module load openfoam
+prepend-path    PATH                    $root/$version/bin
+prepend-path    CPLUS_INCLUDE_PATH      $root/$version/include
+prepend-path    C_INCLUDE_PATH          $root/$version/include
+prepend-path    LD_LIBRARY_PATH         $root/$version/lib
+prepend-path    LIBRARY_PATH            $root/$version/lib
+prepend-path    PKG_CONFIG_PATH         $root/$version/lib/pkgconfig
+
+

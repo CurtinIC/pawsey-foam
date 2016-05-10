@@ -1,0 +1,36 @@
+#!/bin/bash
+cd RPM 
+rpmbuild -ba SPEC/fprun.spec
+
+#Book-keeping : Initialize RPM database
+if [ ! -d $HOME/.usr/local/.rpmdb ]; then
+	mkdir $HOME/.usr/local/.rpmdb
+	rpm --initdb --dbpath $HOME/.usr/local/.rpmdb
+fi
+
+#Install RPM
+find . -name *rpm -exec rpm --nodeps -ivh --dbpath $HOME/.usr/local/.rpmdb  --force {} \;  
+
+#Install customized module pkg
+if [ ! -f $HOME/.profile.d/modules.sh ]; then
+	mkdir -p $HOME/.profile.d
+	chmod +x $HOME/.profile.d
+	echo -e '#!/bin/bash\nexport MODULEPATH=$HOME/.usr/local/share/modulefiles:$MODULEPATH' > $HOME/.profile.d/modules.sh
+	chmod +x $HOME/.profile.d/modules.sh
+fi
+if [ !  $(grep -q \.profile.d $HOME/.bashrc) ]; then
+	echo -e 'for i in $HOME/.profile.d/*.sh ; do
+    if [ -r "$i" ]; then
+        if [ "${-#*i}" != "$-" ]; then
+            . "$i"
+        else
+            . "$i" >/dev/null
+        fi
+    fi
+done
+
+unset i
+'>> $HOME/.bashrc
+fi
+	
+
