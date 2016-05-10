@@ -3,18 +3,18 @@
 #### __Distributed ramfs__
 ##### 
 
-1. On magnus, download and install pawseyFOAM using:
+- On magnus, download and install pawseyFOAM using:
 ```sh
 $ git clone https://github.com/CurtinIC/pawsey-foam.git
 $ cd pawsey-foam
 $ ./install
 ```
-2. Change certain fields in system/decomposeParDict:
+- Change certain fields in system/decomposeParDict:
 ```sh
 distributed yes;
 roots();
 ```
-3. Change the slurm submit script:
+- Change the slurm submit script (file - slurm):
 
 Original:
 ```sh
@@ -46,5 +46,4 @@ faprun rm -rf /dev/shm/*
 
 #### __"LUSTRE" on LUSTRE__
 ##### **To be updated
-
 
