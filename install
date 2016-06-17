@@ -4,7 +4,7 @@ rpmbuild -ba SPEC/fprun.spec
 
 #Book-keeping : Initialize RPM database
 if [ ! -d $HOME/.usr/local/.rpmdb ]; then
-	mkdir $HOME/.usr/local/.rpmdb
+	mkdir -p $HOME/.usr/local/.rpmdb
 	rpm --initdb --dbpath $HOME/.usr/local/.rpmdb
 fi
 
